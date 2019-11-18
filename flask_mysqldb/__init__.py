@@ -32,7 +32,7 @@ class MySQL(object):
         app.config.setdefault('MYSQL_CHARSET', 'utf8')
         app.config.setdefault('MYSQL_SQL_MODE', None)
         app.config.setdefault('MYSQL_CURSORCLASS', None)
-        app.config.setdefault('SSL_DISABLED', False)
+        app.config.setdefault('USE_PURE', False)
 
 
         if hasattr(app, 'teardown_appcontext'):
@@ -80,8 +80,8 @@ class MySQL(object):
         if current_app.config['MYSQL_CURSORCLASS']:
             kwargs['cursorclass'] = getattr(cursors, current_app.config['MYSQL_CURSORCLASS'])
         
-        if current_app.config['SSL_DISABLED']:
-            kwargs['ssl_disabled'] = current_app.config['SSL_DISABLED']
+        if current_app.config['USE_PURE']:
+            kwargs['use_pure'] = current_app.config['USE_PURE']
 
 
         return MySQLdb.connect(**kwargs)
